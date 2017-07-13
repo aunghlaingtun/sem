@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3mobile.css">
+		
+		<style type="text/css">
+			.on_btn_style {
+				background-color: #fda428;
+				color: #FFF;
+				font-family: 'Gotham SSm A', 'Gotham SSm B', Helvetica, Arial, sans-serif;
+				font-size: 15px;
+				border: 0px;
+				width: 300px;
+				border-radius: 3px;
+				padding-top: 10px;
+				padding-bottom: 10px;
+				cursor: pointer;
+			}
+			.off_btn_style {
+				background-color: #fda428;
+				color: #FFF;
+				font-family: 'Gotham SSm A', 'Gotham SSm B', Helvetica, Arial, sans-serif;
+				font-size: 15px;
+				border: 0px;
+				width: 300px;
+				border-radius: 3px;
+				padding-top: 10px;
+				padding-bottom: 10px;
+				cursor: pointer;
+			}			
+		</style>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function(){
+	
+				// On event;
+				$("#onBtn").click(function(){
+					var ipAddress	= prompt("Please enter your local IP Address to Turn On", "");
+					
+					if(!ipAddress){
+						alert("Unable to Turn On your Arduino! Please enter your IP Address Again!");
+					} else {
+						var load = $.ajax({
+							url		: 'http://'+ipAddress+'/arduino/digital/8/0',
+							type	: 'GET',
+							cache	: false,
+							data	: {
+								format: 'json'
+							},
+							error	: function() {
+								//alert("Sorry! we do not have stock!");
+							},
+							dataType: 'json',
+							success	: function(data) {
+								
+							}
+						});
+						alert("Successfully Turn On Load.");
+					}
+				});
+				
+				// Off event;
+				$("#offBtn").click(function(){
+					var ipAddress	= prompt("Please enter your local IP Address to Turn Off", "");
+					
+					if(!ipAddress){
+						alert("Unable to Turn Off your Arduino! Please enter your IP Address Again!");
+					} else {
+						var load = $.ajax({
+							url		: 'http://'+ipAddress+'/arduino/digital/8/1',
+							type	: 'GET',
+							cache	: false,
+							data	: {
+								format: 'json'
+							},
+							error	: function() {
+								//alert("Sorry! we do not have stock!");
+							},
+							dataType: 'json',
+							success	: function(data) {
+								
+							}
+						});
+						alert("Successfully Turn Off Load.");
+					}
+				});
+				
+			});
+		</script>
+	</head>
+	<body style="padding-top: 50px;">
+		<center>
+			<button class="on_btn_style" id="onBtn">ON</button>
+			<br /><br />
+			<button class="off_btn_style" id="offBtn">OFF</button>
+		</center>
+	</body>
+</html>
