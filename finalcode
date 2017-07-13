@@ -16,7 +16,7 @@ unsigned long time;
 // Define measurement variables
 float amplitude_current;
 float effective_value;
-float effective_voltage = 230; // Set voltage to 230V
+float effective_voltage = 230; // supply voltage to 230V
 float effective_power;
 float zero_sensor;
 int measurements_interval = 0;
@@ -125,8 +125,8 @@ void loop() {
      power_measurement_cycles = 0;
     }
     
-  // Repeat every 50 ms
-  delay();
+  // Repeat every 1 mins
+  delay(server_poll_time);
   power_measurement_cycles++;
 }
 
@@ -143,13 +143,13 @@ void runAppendRow(int measurements_interval, float effectiveValue) {
   // Identify the Choreo to run
   AppendRowChoreo.setChoreo("/Library/Google/Spreadsheets/AppendRow");
 
-  // your Google username (usually your email address)
+  // your Google client (usually your google product ID)
   AppendRowChoreo.addInput("ClientID",CLIENT_ID );
 
-  // your Google account password
+  // your Google account client(your google product client secret)
   AppendRowChoreo.addInput("ClientSecret", CLIENT_SECRET);
   
-  // your Google OAuth refresh token
+  // your Google OAuth refresh token(your google product final Outh refesh token)
     AppendRowChoreo.addInput("RefreshToken", REFRESH_TOKEN);
     
   // the title of the spreadsheet you want to append to
